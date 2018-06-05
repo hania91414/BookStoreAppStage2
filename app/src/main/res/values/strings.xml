@@ -3,6 +3,19 @@
     <string name="action_instert_dummy_data">Insert Dummy Data</string>
     <string name="action_delete_all_books">Delete All Books</string>
     <string name="title_activity_prod_details">Product Details</string>
+    <string name="sale_button">Sale</string>
+    <string name="name_textholder">Product name</string>
+    <string name="quantity_textholder">Quantity</string>
+    <string name="price_textholder">Price</string>
+    <string name="editor_overview">Overview</string>
+    <string name="supplier_name_textholder">Supplier name</string>
+    <string name="supplier_phone_number">Supplier phone number</string>
+    <string name="button_increase">+</string>
+    <string name="button_decrease">-</string>
+    <string name="supplier_data">Supplier Data</string>
+    <string name="button_order">Order</string>
+    <string name="price_currency">$</string>
+
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">It\'s a bit lonely here...</string>
