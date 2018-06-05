@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         addDummyDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertBook();
                 displayDatabaseInfo();
             }
         });
@@ -82,10 +81,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.insert_dummy_data) {
+            insertBook();
             return true;
         }
 
+        if (id == R.id.action_delete_all_books) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

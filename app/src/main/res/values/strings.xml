@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Bookstore App</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_instert_dummy_data">Insert Dummy Data</string>
+    <string name="action_delete_all_books">Delete All Books</string>
     <string name="title_activity_prod_details">Product Details</string>
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
