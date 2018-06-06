@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
         // and pass the context, which is the current activity.
         mDbHelper = new BookDbHelper(this);
 
-        addDummyDataButton = findViewById(R.id.button);
-        addDummyDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayDatabaseInfo();
-            }
-        });
+//        addDummyDataButton = findViewById(R.id.button);
+//        addDummyDataButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                displayDatabaseInfo();
+//            }
+//        });
     }
 
     @Override

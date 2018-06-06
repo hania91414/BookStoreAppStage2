@@ -31,7 +31,7 @@
             android:id="@+id/empty_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/empty_shelter_image"
+            android:layout_below="@+id/bookworm_image"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="16dp"
@@ -56,11 +56,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add dummy data" />
+        <!--<Button-->
+        <!--android:id="@+id/button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Add dummy data" />-->
 
     <TextView
         android:id="@+id/show_items_text_view"
