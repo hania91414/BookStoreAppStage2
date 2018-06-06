@@ -28,6 +28,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <provider
+            android:name=".data.BookProvider"
+            android:authorities="com.example.hanna.bookstoreappstage2"
+            android:exported="false" />
     </application>
 
 </manifest>
