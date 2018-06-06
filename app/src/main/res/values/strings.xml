@@ -15,6 +15,16 @@
     <string name="supplier_data">Supplier Data</string>
     <string name="button_order">Order</string>
     <string name="price_currency">$</string>
+    <string name="editor_activity_title_new_book">Add a book</string>
+    <string name="editor_activity_title_edit_book">Edit Book</string>
+    <string name="editor_insert_book_failed">Insert book failed</string>
+    <string name="editor_insert_book_successful">Insert book successful</string>
+    <string name="editor_update_book_failed">Update book failed</string>
+    <string name="editor_update_book_successful">Update book successful</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="editor_delete_book_failed">Delete book failed</string>
+    <string name="editor_delete_book_successful">Delete book successful</string>
 
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
@@ -22,4 +32,22 @@
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this pet?</string>
+
 </resources>
