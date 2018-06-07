@@ -15,10 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.widget.Toast;
 
 import com.example.hanna.bookstoreappstage2.data.BookDbHelper;
 import com.example.hanna.bookstoreappstage2.data.BookContract.BookEntry;
@@ -60,7 +62,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mCursorAdapter = new BookCursorAdapter(this, null);
         bookListView.setAdapter(mCursorAdapter);
 
-
+//        Button sale = (Button) findViewById(R.id.sale);
+//        sale.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Toast.makeText(MainActivity.this, "button works",Toast.LENGTH_SHORT).show();
+//            }
+//        });
         // Setup the item click listener
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 // Launch the {@link EditorActivity} to display the data for the current pet.
                 startActivity(intent);
+
             }
         });
 
@@ -84,18 +94,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
     }
 
-//        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-//        // and pass the context, which is the current activity.
-//        mDbHelper = new BookDbHelper(this);
-
-//        addDummyDataButton = findViewById(R.id.button);
-//        addDummyDataButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                displayDatabaseInfo();
-//            }
-//        });
-//    }
 
     /**
      * Helper method to insert hardcoded data into the database. For debugging purposes only.

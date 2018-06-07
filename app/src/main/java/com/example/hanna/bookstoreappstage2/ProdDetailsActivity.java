@@ -290,7 +290,7 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
-            mQuantityTextView.setText(quantity);
+            mQuantityTextView.setText(Integer.toString(quantity));
             mPriceEditText.setText(Integer.toString(price));
         }
     }

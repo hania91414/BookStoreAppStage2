@@ -61,11 +61,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/sale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:text="@string/sale_button" />
+    <!--<Button-->
+    <!--android:id="@+id/sale"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:text="@string/sale_button" />-->
 </LinearLayout>
