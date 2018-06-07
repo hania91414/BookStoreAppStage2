@@ -25,6 +25,7 @@
     <string name="action_delete">Delete</string>
     <string name="editor_delete_book_failed">Delete book failed</string>
     <string name="editor_delete_book_successful">Delete book successful</string>
+    <string name="quantity_lower_than_zero">Quantity cannot be lower than 0</string>
 
 
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->

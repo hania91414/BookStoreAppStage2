@@ -35,16 +35,20 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
     //variable to change book quantity
     int numberQuantity = 0;
+
+    //EditText fields to enter the book data
+    private EditText mNameEditText;
     private TextView mQuantityTextView;
     private EditText mPriceEditText;
     private EditText mSupplierName;
     private EditText mSupplierPhoneNumber;
+
     //Content URI for the existing book(null if it's a new book)
     private Uri mCurrentBookUri;
+
     //variable to get suppliers phone number
     String supplierPhoneNb;
-    //EditText fields to enter the book data
-    private EditText mNameEditText;
+
 
     // Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mBookHasChanged = false;
@@ -109,30 +113,37 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             public void onClick(View v) {
                 if (mCurrentBookUri == null) {
                     numberQuantity++;
-                    mQuantityTextView.setText(Integer.toString(numberQuantity));
-
+                    mQuantityTextView.setText(String.valueOf(numberQuantity));
                 } else {
                     numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
                     numberQuantity++;
-                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+                    mQuantityTextView.setText(String.valueOf(numberQuantity));
                 }
 
             }
         });
 
+
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mCurrentBookUri == null) {
-                    numberQuantity--;
-                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+                    if (numberQuantity == 0) {
+                        Toast.makeText(ProdDetailsActivity.this, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        numberQuantity--;
+                    }
 
-                } else {
+                } else if (mCurrentBookUri != null)
                     numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
+                if (numberQuantity == 0) {
+                    Toast.makeText(ProdDetailsActivity.this, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
                     numberQuantity--;
-                    mQuantityTextView.setText(Integer.toString(numberQuantity));
                 }
-
+                mQuantityTextView.setText(String.valueOf(numberQuantity));
             }
         });
 
@@ -144,9 +155,14 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
                     Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + supplierPhoneNb));
                     startActivity(callIntent);
                 }
-
             }
         });
+
+        // Restore value of quantity from saved state
+        if (savedInstanceState != null) {
+            numberQuantity = savedInstanceState.getInt("numberQuantity");
+            mQuantityTextView.setText(String.valueOf(numberQuantity));
+        }
     }
 
     /**
@@ -453,6 +469,18 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
         // Close the activity
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("numberQuantity", numberQuantity);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        numberQuantity = savedInstanceState.getInt("numberQuantity");
     }
 
 }
