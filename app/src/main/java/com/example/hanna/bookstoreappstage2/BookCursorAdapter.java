@@ -7,8 +7,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hanna.bookstoreappstage2.data.BookContract.BookEntry;
 
@@ -17,6 +19,8 @@ public class BookCursorAdapter extends CursorAdapter {
     public BookCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
     }
+
+    int numberQuantity;
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -29,11 +33,28 @@ public class BookCursorAdapter extends CursorAdapter {
      * list item layout.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
         TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
         TextView priceTextView = (TextView) view.findViewById(R.id.price);
+
+//        numberQuantity = Integer.valueOf(quantityTextView.getText().toString().trim());
+
+        Button sale = (Button) view.findViewById(R.id.sale);
+        sale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                if (numberQuantity == 0) {
+//                    Toast.makeText(context, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+//                    return;
+//                } else {
+//                    numberQuantity--;
+                Toast.makeText(context, "button works", Toast.LENGTH_SHORT).show();
+//                }
+            }
+        });
 
         // Find the columns of book attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);

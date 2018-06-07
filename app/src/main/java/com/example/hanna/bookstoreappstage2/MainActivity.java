@@ -62,14 +62,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mCursorAdapter = new BookCursorAdapter(this, null);
         bookListView.setAdapter(mCursorAdapter);
 
-//        Button sale = (Button) findViewById(R.id.sale);
-//        sale.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(MainActivity.this, "button works",Toast.LENGTH_SHORT).show();
-//            }
-//        });
         // Setup the item click listener
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

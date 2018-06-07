@@ -165,6 +165,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             numberQuantity = savedInstanceState.getInt("numberQuantity");
             mQuantityTextView.setText(String.valueOf(numberQuantity));
         }
+
+        
     }
 
     /**
