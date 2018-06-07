@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,18 +30,17 @@ import com.example.hanna.bookstoreappstage2.data.BookContract.BookEntry;
 
 public class ProdDetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-
-    //EditText fields to enter the book data
-
     //Identifier for the book data loader
     private static final int EXISTING_BOOK_LOADER = 0;
-    private EditText mNameEditText;
+    int numberQuantity = 0;
     private TextView mQuantityTextView;
     private EditText mPriceEditText;
     private EditText mSupplierName;
     private EditText mSupplierPhoneNumber;
     //Content URI for the existing book(null if it's a new book)
     private Uri mCurrentBookUri;
+    //EditText fields to enter the book data
+    private EditText mNameEditText;
 
     // Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mBookHasChanged = false;
@@ -58,6 +59,9 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prod_details);
+
+        Button increase = (Button) findViewById(R.id.increase);
+        Button decrease = (Button) findViewById(R.id.decrease);
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new book or editing an existing one.
@@ -94,6 +98,23 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSupplierName.setOnTouchListener(mTouchListener);
         mSupplierPhoneNumber.setOnTouchListener(mTouchListener);
+
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurrentBookUri == null) {
+                    numberQuantity++;
+                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+
+                } else {
+                    numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
+                    numberQuantity++;
+                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+                }
+
+            }
+        });
+
     }
 
     /**
@@ -319,6 +340,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         mNameEditText.setText("");
         mQuantityTextView.setText("");
         mPriceEditText.setText("");
+        mSupplierName.setText("");
+        mSupplierPhoneNumber.setText("");
     }
 
     private void showUnsavedChangesDialog(
@@ -399,6 +422,5 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         // Close the activity
         finish();
     }
-
 
 }
