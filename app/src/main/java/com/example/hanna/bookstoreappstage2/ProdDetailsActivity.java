@@ -41,9 +41,10 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
     private EditText mSupplierPhoneNumber;
     //Content URI for the existing book(null if it's a new book)
     private Uri mCurrentBookUri;
+    //variable to get suppliers phone number
+    String supplierPhoneNb;
     //EditText fields to enter the book data
     private EditText mNameEditText;
-
 
     // Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mBookHasChanged = false;
@@ -65,6 +66,7 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
         Button increase = (Button) findViewById(R.id.increase);
         Button decrease = (Button) findViewById(R.id.decrease);
+        Button order = (Button) findViewById(R.id.order);
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new book or editing an existing one.
@@ -76,7 +78,7 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         if (mCurrentBookUri == null) {
             // This is a new book, so change the app bar to say "Add a Book"
             setTitle(getString(R.string.editor_activity_title_new_book));
-
+            order.setVisibility(View.GONE);
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a book that hasn't been created yet.)
             invalidateOptionsMenu();
@@ -134,6 +136,17 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             }
         });
 
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurrentBookUri != null) {
+                    supplierPhoneNb = mSupplierPhoneNumber.getText().toString().trim();
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + supplierPhoneNb));
+                    startActivity(callIntent);
+                }
+
+            }
+        });
     }
 
     /**
