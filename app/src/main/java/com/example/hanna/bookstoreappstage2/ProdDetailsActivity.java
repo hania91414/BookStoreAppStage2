@@ -199,12 +199,20 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPn);
 
         // If the quantity is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
+        // integer value. Use 1 by default.
         int quantityQ = 1;
         if (!TextUtils.isEmpty(quantityString)) {
             quantityQ = Integer.parseInt(quantityString);
         }
         values.put(BookEntry.COLUMN_QUANTITY, quantityQ);
+
+        // If the price is not provided by the user, don't try to parse the string into an
+        // integer value. Use 0 by default.
+        int priceP = 0;
+        if (!TextUtils.isEmpty(priceString)) {
+            priceP = Integer.parseInt(priceString);
+        }
+        values.put(BookEntry.COLUMN_PRICE, priceP);
 
         // Determine if this is a new or existing book by checking if mCurrentPetUri is null or not
         if (mCurrentBookUri == null) {
