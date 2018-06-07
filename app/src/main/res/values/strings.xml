@@ -5,7 +5,7 @@
     <string name="title_activity_prod_details">Product Details</string>
     <string name="sale_button">Sale</string>
     <string name="name_textholder">Product name</string>
-    <string name="quantity_textholder">Quantity</string>
+    <string name="quantity_textholder">0</string>
     <string name="price_textholder">Price</string>
     <string name="editor_overview">Overview</string>
     <string name="supplier_name_textholder">Supplier name</string>

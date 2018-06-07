@@ -127,6 +127,16 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mCurrentBookUri != null) {
+                    numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
+                    if (numberQuantity == 0) {
+                        Toast.makeText(ProdDetailsActivity.this, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        numberQuantity--;
+                    }
+                }
+
                 if (mCurrentBookUri == null) {
                     if (numberQuantity == 0) {
                         Toast.makeText(ProdDetailsActivity.this, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
@@ -134,14 +144,6 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
                     } else {
                         numberQuantity--;
                     }
-
-                } else if (mCurrentBookUri != null)
-                    numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
-                if (numberQuantity == 0) {
-                    Toast.makeText(ProdDetailsActivity.this, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    numberQuantity--;
                 }
                 mQuantityTextView.setText(String.valueOf(numberQuantity));
             }
@@ -196,13 +198,13 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPn);
 
-//        // If the weight is not provided by the user, don't try to parse the string into an
-//        // integer value. Use 0 by default.
-//        int weight = 0;
-//        if (!TextUtils.isEmpty(weightString)) {
-//            weight = Integer.parseInt(weightString);
-//        }
-//        values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
+        // If the quantity is not provided by the user, don't try to parse the string into an
+        // integer value. Use 0 by default.
+        int quantityQ = 1;
+        if (!TextUtils.isEmpty(quantityString)) {
+            quantityQ = Integer.parseInt(quantityString);
+        }
+        values.put(BookEntry.COLUMN_QUANTITY, quantityQ);
 
         // Determine if this is a new or existing book by checking if mCurrentPetUri is null or not
         if (mCurrentBookUri == null) {
