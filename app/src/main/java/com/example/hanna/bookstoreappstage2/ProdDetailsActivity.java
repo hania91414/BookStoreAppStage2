@@ -32,6 +32,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
     //Identifier for the book data loader
     private static final int EXISTING_BOOK_LOADER = 0;
+
+    //variable to change book quantity
     int numberQuantity = 0;
     private TextView mQuantityTextView;
     private EditText mPriceEditText;
@@ -41,6 +43,7 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
     private Uri mCurrentBookUri;
     //EditText fields to enter the book data
     private EditText mNameEditText;
+
 
     // Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mBookHasChanged = false;
@@ -109,6 +112,22 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
                 } else {
                     numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
                     numberQuantity++;
+                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+                }
+
+            }
+        });
+
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurrentBookUri == null) {
+                    numberQuantity--;
+                    mQuantityTextView.setText(Integer.toString(numberQuantity));
+
+                } else {
+                    numberQuantity = Integer.valueOf(mQuantityTextView.getText().toString().trim());
+                    numberQuantity--;
                     mQuantityTextView.setText(Integer.toString(numberQuantity));
                 }
 
