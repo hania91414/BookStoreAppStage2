@@ -36,6 +36,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
     private EditText mNameEditText;
     private TextView mQuantityTextView;
     private EditText mPriceEditText;
+    private EditText mSupplierName;
+    private EditText mSupplierPhoneNumber;
     //Content URI for the existing book(null if it's a new book)
     private Uri mCurrentBookUri;
 
@@ -83,11 +85,15 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         mNameEditText = (EditText) findViewById(R.id.edit_product_name);
         mQuantityTextView = (TextView) findViewById(R.id.quantity);
         mPriceEditText = (EditText) findViewById(R.id.price);
+        mSupplierName = (EditText) findViewById(R.id.edit_supplier_name);
+        mSupplierPhoneNumber = (EditText) findViewById(R.id.edit_supplier_phone_number);
 
 
         mNameEditText.setOnTouchListener(mTouchListener);
         mQuantityTextView.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
+        mSupplierName.setOnTouchListener(mTouchListener);
+        mSupplierPhoneNumber.setOnTouchListener(mTouchListener);
     }
 
     /**
@@ -99,12 +105,14 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         String nameString = mNameEditText.getText().toString().trim();
         String quantityString = mQuantityTextView.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
+        String supplierName = mPriceEditText.getText().toString().trim();
+        String supplierPn = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new book
         // and check if all the fields in the editor are blank
         if (mCurrentBookUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(quantityString) &&
-                TextUtils.isEmpty(priceString)) {
+                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(supplierName) && TextUtils.isEmpty(supplierPn)) {
             // Since no fields were modified, we can return early without creating a new book.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
@@ -116,6 +124,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         values.put(BookEntry.COLUMN_PRODUCT_NAME, nameString);
         values.put(BookEntry.COLUMN_QUANTITY, quantityString);
         values.put(BookEntry.COLUMN_PRICE, priceString);
+        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPn);
 
 //        // If the weight is not provided by the user, don't try to parse the string into an
 //        // integer value. Use 0 by default.
@@ -255,7 +265,9 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
                 BookEntry._ID,
                 BookEntry.COLUMN_PRODUCT_NAME,
                 BookEntry.COLUMN_PRICE,
-                BookEntry.COLUMN_QUANTITY};
+                BookEntry.COLUMN_QUANTITY,
+                BookEntry.COLUMN_SUPPLIER_NAME,
+                BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -281,17 +293,23 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
             int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
             int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
+            int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
+            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
 
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
+            String supplierName = cursor.getString(supplierNameColumnIndex);
+            int supplierPhoneNumber = cursor.getInt(supplierPhoneColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
             mQuantityTextView.setText(Integer.toString(quantity));
             mPriceEditText.setText(Integer.toString(price));
+            mSupplierName.setText(supplierName);
+            mSupplierPhoneNumber.setText(Integer.toString(supplierPhoneNumber));
         }
     }
 
