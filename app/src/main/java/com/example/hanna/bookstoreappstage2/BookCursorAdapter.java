@@ -1,8 +1,12 @@
 
 package com.example.hanna.bookstoreappstage2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hanna.bookstoreappstage2.data.BookContract.BookEntry;
+import com.example.hanna.bookstoreappstage2.data.BookDbHelper;
 
 public class BookCursorAdapter extends CursorAdapter {
 
@@ -36,31 +41,35 @@ public class BookCursorAdapter extends CursorAdapter {
     public void bindView(View view, final Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
-        TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
+        final TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
         TextView priceTextView = (TextView) view.findViewById(R.id.price);
-
-//        numberQuantity = Integer.valueOf(quantityTextView.getText().toString().trim());
-
-        Button sale = (Button) view.findViewById(R.id.sale);
-        sale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                if (numberQuantity == 0) {
-//                    Toast.makeText(context, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
-//                    return;
-//                } else {
-//                    numberQuantity--;
-                Toast.makeText(context, "button works", Toast.LENGTH_SHORT).show();
-//                }
-            }
-        });
 
         // Find the columns of book attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
         int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
 
+        int idColumnIndex = cursor.getColumnIndex(BookEntry._ID);
+        int id = cursor.getInt(idColumnIndex);
+        final Uri contentUri = Uri.withAppendedPath(BookEntry.CONTENT_URI, Integer.toString(id));
+
+        Button sale = (Button) view.findViewById(R.id.sale);
+        sale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantityInt = Integer.valueOf(quantityTextView.getText().toString());
+
+                if (quantityInt == 0) {
+                    Toast.makeText(context, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    quantityInt--;
+                }
+                ContentValues values = new ContentValues();
+                values.put(BookEntry.COLUMN_QUANTITY, quantityInt);
+                context.getContentResolver().update(contentUri, values, null, null);
+            }
+        });
 
         // Read the book attributes from the Cursor for the current pet
         String bookName = cursor.getString(nameColumnIndex);
