@@ -25,7 +25,6 @@ public class BookCursorAdapter extends CursorAdapter {
         super(context, c, 0 /* flags */);
     }
 
-    int numberQuantity;
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -74,7 +73,7 @@ public class BookCursorAdapter extends CursorAdapter {
             }
         });
 
-        // Read the book attributes from the Cursor for the current pet
+        // Read the book attributes from the Cursor for the current book
         String bookName = cursor.getString(nameColumnIndex);
         String bookQuantity = cursor.getString(quantityColumnIndex);
         String priceQuantity = cursor.getString(priceColumnIndex);
@@ -85,7 +84,7 @@ public class BookCursorAdapter extends CursorAdapter {
 //            petBreed = context.getString(R.string.unknown_breed);
 //        }
 
-        // Update the TextViews with the attributes for the current pet
+        // Update the TextViews with the attributes for the current book
         nameTextView.setText(bookName);
         quantityTextView.setText(bookQuantity);
         priceTextView.setText(priceQuantity);

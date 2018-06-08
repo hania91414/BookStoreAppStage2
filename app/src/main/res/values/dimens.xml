@@ -14,4 +14,5 @@
     <dimen name="space_between_buttons">6dp</dimen>
     <dimen name="margin_price_and_quantity">4dp</dimen>
     <dimen name="margin_right_sale_button">14dp</dimen>
+    <dimen name="padding_quantity_number">2dp</dimen>
 </resources>

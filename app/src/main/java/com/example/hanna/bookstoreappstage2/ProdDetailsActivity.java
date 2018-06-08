@@ -176,8 +176,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         String nameString = mNameEditText.getText().toString().trim();
         String quantityString = mQuantityTextView.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
-        String supplierName = mPriceEditText.getText().toString().trim();
-        String supplierPn = mPriceEditText.getText().toString().trim();
+        String supplierName = mSupplierName.getText().toString().trim();
+        String supplierPn = mSupplierPhoneNumber.getText().toString().trim();
 
         // Check if this is supposed to be a new book
         // and check if all the fields in the editor are blank
