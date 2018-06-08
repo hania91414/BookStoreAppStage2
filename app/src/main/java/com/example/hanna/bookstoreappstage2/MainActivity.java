@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Find the ListView which will be populated with the book data
         ListView bookListView = (ListView) findViewById(R.id.list);
+        bookListView.setBackgroundResource(R.color.list_background);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);

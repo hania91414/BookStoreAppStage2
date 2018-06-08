@@ -35,5 +35,8 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="delete_dialog_msg">Delete this book?</string>
+    <string name="sold_out">Sold out</string>
+    <string name="quantity_text">Quantity:</string>
+    <string name="price_text">Price:</string>
 
 </resources>

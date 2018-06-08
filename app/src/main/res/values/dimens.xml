@@ -7,4 +7,11 @@
     <dimen name="increase_decrease_button_width">50dp</dimen>
     <dimen name="increase_decrease_button_height">40dp</dimen>\
     <dimen name="input_padding_left">4dp</dimen>
+    <dimen name="margin_end_list_item">20dp</dimen>
+    <dimen name="padding_right_editor">16dp</dimen>
+    <dimen name="padding_top_editor">16dp</dimen>
+    <dimen name="padding_left_small">4dp</dimen>
+    <dimen name="space_between_buttons">6dp</dimen>
+    <dimen name="margin_price_and_quantity">4dp</dimen>
+    <dimen name="margin_right_sale_button">14dp</dimen>
 </resources>

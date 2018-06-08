@@ -48,8 +48,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingRight">@dimen/padding_right_editor</item>
+        <item name="android:paddingTop">@dimen/padding_top_editor</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 

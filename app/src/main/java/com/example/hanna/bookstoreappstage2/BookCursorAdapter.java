@@ -49,10 +49,12 @@ public class BookCursorAdapter extends CursorAdapter {
         int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
 
+        //find id of book
         int idColumnIndex = cursor.getColumnIndex(BookEntry._ID);
         int id = cursor.getInt(idColumnIndex);
         final Uri contentUri = Uri.withAppendedPath(BookEntry.CONTENT_URI, Integer.toString(id));
 
+        //decrease number when clicking on sale button
         Button sale = (Button) view.findViewById(R.id.sale);
         sale.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +62,12 @@ public class BookCursorAdapter extends CursorAdapter {
                 int quantityInt = Integer.valueOf(quantityTextView.getText().toString());
 
                 if (quantityInt == 0) {
-                    Toast.makeText(context, R.string.quantity_lower_than_zero, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.sold_out, Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     quantityInt--;
                 }
+                //update quantity in database
                 ContentValues values = new ContentValues();
                 values.put(BookEntry.COLUMN_QUANTITY, quantityInt);
                 context.getContentResolver().update(contentUri, values, null, null);
