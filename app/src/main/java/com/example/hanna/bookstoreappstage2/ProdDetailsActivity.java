@@ -217,21 +217,32 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         values.put(BookEntry.COLUMN_PRICE, priceP);
 
         if (TextUtils.isEmpty(nameString)) {
-            mNameEditText.setError("This field is required");
+            Toast.makeText(this, "Name is required", Toast.LENGTH_SHORT).show();
             valuesMissing = 1;
             return;
+        }
+        if (!TextUtils.isEmpty(nameString)) {
+            valuesMissing = 0;
         }
 
         if (TextUtils.isEmpty(supplierName)) {
-            mSupplierName.setError("This field is required");
+            Toast.makeText(this, "Supplier name is required", Toast.LENGTH_SHORT).show();
             valuesMissing = 1;
             return;
         }
 
+        if (!TextUtils.isEmpty(supplierName)) {
+            valuesMissing = 0;
+        }
+
         if (TextUtils.isEmpty(supplierPn)) {
-            mSupplierPhoneNumber.setError("This field is required");
+            Toast.makeText(this, "Supplier phone is required", Toast.LENGTH_SHORT).show();
             valuesMissing = 1;
             return;
+        }
+
+        if (!TextUtils.isEmpty(supplierPn)) {
+            valuesMissing = 0;
         }
 
         // Determine if this is a new or existing book by checking if mCurrentPetUri is null or not
