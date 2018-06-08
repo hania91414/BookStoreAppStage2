@@ -70,9 +70,9 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prod_details);
 
-        Button increase = (Button) findViewById(R.id.increase);
-        Button decrease = (Button) findViewById(R.id.decrease);
-        Button order = (Button) findViewById(R.id.order);
+        Button increase = findViewById(R.id.increase);
+        Button decrease = findViewById(R.id.decrease);
+        Button order = findViewById(R.id.order);
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new book or editing an existing one.
@@ -97,11 +97,11 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             getLoaderManager().initLoader(EXISTING_BOOK_LOADER, null, this);
         }
         // Find all relevant views that we will need to read user input from
-        mNameEditText = (EditText) findViewById(R.id.edit_product_name);
-        mQuantityTextView = (TextView) findViewById(R.id.quantity);
-        mPriceEditText = (EditText) findViewById(R.id.price);
-        mSupplierName = (EditText) findViewById(R.id.edit_supplier_name);
-        mSupplierPhoneNumber = (EditText) findViewById(R.id.edit_supplier_phone_number);
+        mNameEditText = findViewById(R.id.edit_product_name);
+        mQuantityTextView = findViewById(R.id.quantity);
+        mPriceEditText = findViewById(R.id.price);
+        mSupplierName = findViewById(R.id.edit_supplier_name);
+        mSupplierPhoneNumber = findViewById(R.id.edit_supplier_phone_number);
 
 
         mNameEditText.setOnTouchListener(mTouchListener);
@@ -240,7 +240,7 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
             valuesMissing = 1;
             return;
         }
-
+        
         if (!TextUtils.isEmpty(supplierPn)) {
             valuesMissing = 0;
         }
