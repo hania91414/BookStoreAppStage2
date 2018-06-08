@@ -34,7 +34,7 @@
             android:layout_below="@+id/bookworm_image"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/padding_title"
             android:text="@string/empty_view_title_text"
             android:textAppearance="?android:textAppearanceMedium"/>
 
@@ -45,22 +45,18 @@
             android:layout_below="@+id/empty_title_text"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:paddingTop="8dp"
+            android:layout_margin="@dimen/subtitle_layout_margin"
+            android:gravity="center"
+            android:paddingTop="@dimen/subtitle_padding_top"
             android:text="@string/empty_view_subtitle_text"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#A2AAB0"/>
+            android:textColor="@color/subtitle_text_color" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <!--<Button-->
-        <!--android:id="@+id/button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Add dummy data" />-->
 
     <TextView
         android:id="@+id/show_items_text_view"

@@ -8,11 +8,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.hanna.bookstoreappstage2.R;
 import com.example.hanna.bookstoreappstage2.data.BookContract.BookEntry;
 
 /**
- * {@link ContentProvider} for Pets app.
+ * {@link ContentProvider} for Books app.
  */
 public class BookProvider extends ContentProvider {
 
@@ -20,12 +22,12 @@ public class BookProvider extends ContentProvider {
     public static final String LOG_TAG = BookProvider.class.getSimpleName();
 
     /**
-     * URI matcher code for the content URI for the pets table
+     * URI matcher code for the content URI for the books table
      */
     private static final int BOOKS = 100;
 
     /**
-     * URI matcher code for the content URI for a single pet in the pets table
+     * URI matcher code for the content URI for a single book in the books table
      */
     private static final int BOOK_ID = 101;
 
@@ -65,9 +67,9 @@ public class BookProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case BOOKS:
-                // For the PETS code, query the pets table directly with the given
+                // For the BOOKS code, query the books table directly with the given
                 // projection, selection, selection arguments, and sort order. The cursor
-                // could contain multiple rows of the pets table.
+                // could contain multiple rows of the books table.
                 cursor = database.query(BookEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
@@ -101,7 +103,7 @@ public class BookProvider extends ContentProvider {
     }
 
     /**
-     * Insert a pet into the database with the given content values. Return the new content URI
+     * Insert a book into the database with the given content values. Return the new content URI
      * for that specific row in the database.
      */
     private Uri insertBook(Uri uri, ContentValues values) {
@@ -110,12 +112,6 @@ public class BookProvider extends ContentProvider {
         if (name == null) {
             throw new IllegalArgumentException("Product requires a name");
         }
-
-//        // Check that the price is valid
-//        Integer gender = values.getAsInteger(BookEntry.COLUMN_PRICE);
-//        if (gender == null || !BookEntry.isValidGender(gender)) {
-//            throw new IllegalArgumentException("Product requires valid price");
-//        }
 
         // If the price is provided, check that it's greater than or equal to 0 $
         Integer price = values.getAsInteger(BookEntry.COLUMN_PRICE);
@@ -126,7 +122,7 @@ public class BookProvider extends ContentProvider {
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new pet with the given values
+        // Insert the new book with the given values
         long id = database.insert(BookEntry.TABLE_NAME, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -147,7 +143,7 @@ public class BookProvider extends ContentProvider {
             case BOOKS:
                 return updateBook(uri, contentValues, selection, selectionArgs);
             case BOOK_ID:
-                // For the PET_ID code, extract out the ID from the URI,
+                // For the BOOK_ID code, extract out the ID from the URI,
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = BookEntry._ID + "=?";
@@ -160,7 +156,7 @@ public class BookProvider extends ContentProvider {
 
     /**
      * Update books in the database with the given content values. Apply the changes to the rows
-     * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
+     * specified in the selection and selection arguments (which could be 0 or 1 or more books).
      * Return the number of rows that were successfully updated.
      */
     private int updateBook(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
@@ -169,29 +165,43 @@ public class BookProvider extends ContentProvider {
         if (values.containsKey(BookEntry.COLUMN_PRODUCT_NAME)) {
             String name = values.getAsString(BookEntry.COLUMN_PRODUCT_NAME);
             if (name == null) {
-                throw new IllegalArgumentException("Product requires a name");
+                throw new IllegalArgumentException("Book name field is required");
             }
         }
 
-//        // If the {@link PetEntry#COLUMN_PET_GENDER} key is present,
-//        // check that the gender value is valid.
-//        if (values.containsKey(PetEntry.COLUMN_PET_GENDER)) {
-//            Integer gender = values.getAsInteger(PetEntry.COLUMN_PET_GENDER);
-//            if (gender == null || !PetEntry.isValidGender(gender)) {
-//                throw new IllegalArgumentException("Pet requires valid gender");
-//            }
-//        }
-//
-//        // If the {@link PetEntry#COLUMN_PET_WEIGHT} key is present,
-//        // check that the weight value is valid.
-//        if (values.containsKey(PetEntry.COLUMN_PET_WEIGHT)) {
-//            // Check that the weight is greater than or equal to 0 kg
-//            Integer weight = values.getAsInteger(PetEntry.COLUMN_PET_WEIGHT);
-//            if (weight != null && weight < 0) {
-//                throw new IllegalArgumentException("Pet requires valid weight");
-//            }
-//        }
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER_NAME)) {
+            String supplierName = values.getAsString(BookEntry.COLUMN_SUPPLIER_NAME);
+            if (supplierName == null) {
+                throw new IllegalArgumentException("Supplier name field is required");
+            }
+        }
 
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER)) {
+            String supplierNumber = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
+            if (supplierNumber == null) {
+                throw new IllegalArgumentException("Supplier phone number field is required");
+            }
+        }
+
+        // If the {@link BookEntry#COLUMN_PRICE} key is present,
+        // check that the price value is valid.
+        if (values.containsKey(BookEntry.COLUMN_PRICE)) {
+            // Check that the price is greater than or equal to 0
+            Integer price = values.getAsInteger(BookEntry.COLUMN_PRICE);
+            if (price != null && price < 0) {
+                throw new IllegalArgumentException("Book requires valid price");
+            }
+        }
+
+        // If the {@link BookEntry#COLUMN_SUPPLIER_PHONE_NUMBER} key is present,
+        // check that the phone number value is valid.
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER)) {
+            // Check that the price is greater than or equal to 0
+            Integer phoneNumber = values.getAsInteger(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
+            if (phoneNumber != null && phoneNumber < 0) {
+                throw new IllegalArgumentException("Supplier field requires valid phone number");
+            }
+        }
 
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {

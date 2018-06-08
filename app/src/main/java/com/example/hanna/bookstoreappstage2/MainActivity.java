@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         // Setup an Adapter to create a list item for each row of book data in the Cursor.
-        // There is no pet data yet (until the loader finishes) so pass in null for the Cursor.
+        // There is no book data yet (until the loader finishes) so pass in null for the Cursor.
         mCursorAdapter = new BookCursorAdapter(this, null);
         bookListView.setAdapter(mCursorAdapter);
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 // Set the URI on the data field of the intent
                 intent.setData(currentBookUri);
 
-                // Launch the {@link EditorActivity} to display the data for the current pet.
+                // Launch the {@link EditorActivity} to display the data for the current book.
                 startActivity(intent);
 
             }
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     private void insertBook() {
         // Create a ContentValues object where column names are the keys,
-        // and Toto's pet attributes are the values.
+        // and Gone with the wind book's attributes are the values.
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_PRODUCT_NAME, "Gone with the wind");
         values.put(BookEntry.COLUMN_PRICE, 10);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_books:
-                // Delete all pets
+                // Delete all books
                 deleteAllBooks();
                 return true;
         }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link PetCursorAdapter} with this new cursor containing updated pet data
+        // Update {@link BookCursorAdapter} with this new cursor containing updated book data
         mCursorAdapter.swapCursor(data);
     }
 

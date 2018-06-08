@@ -78,12 +78,6 @@ public class BookCursorAdapter extends CursorAdapter {
         String bookQuantity = cursor.getString(quantityColumnIndex);
         String priceQuantity = cursor.getString(priceColumnIndex);
 
-//        // If the pet breed is empty string or null, then use some default text
-//        // that says "Unknown breed", so the TextView isn't blank. SHOW "UNKNOWN BREED"
-//        if (TextUtils.isEmpty(petBreed)) {
-//            petBreed = context.getString(R.string.unknown_breed);
-//        }
-
         // Update the TextViews with the attributes for the current book
         nameTextView.setText(bookName);
         quantityTextView.setText(bookQuantity);

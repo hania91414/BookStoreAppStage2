@@ -35,6 +35,8 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
 
     //variable to change book quantity
     int numberQuantity = 0;
+    //supporting variable to not quit the activity if required fields are missing
+    int valuesMissing = 0;
 
     //EditText fields to enter the book data
     private EditText mNameEditText;
@@ -214,11 +216,31 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         }
         values.put(BookEntry.COLUMN_PRICE, priceP);
 
+        if (TextUtils.isEmpty(nameString)) {
+            mNameEditText.setError("This field is required");
+            valuesMissing = 1;
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierName)) {
+            mSupplierName.setError("This field is required");
+            valuesMissing = 1;
+            return;
+        }
+
+        if (TextUtils.isEmpty(supplierPn)) {
+            mSupplierPhoneNumber.setError("This field is required");
+            valuesMissing = 1;
+            return;
+        }
+
         // Determine if this is a new or existing book by checking if mCurrentPetUri is null or not
         if (mCurrentBookUri == null) {
+
             // This is a NEW book, so insert a new book into the provider,
             // returning the content URI for the new book.
             Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
+
 
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
@@ -279,8 +301,13 @@ public class ProdDetailsActivity extends AppCompatActivity implements LoaderMana
         switch (item.getItemId()) {
             case R.id.action_save:
                 saveBook();
-                finish();
-                return true;
+                if (valuesMissing == 1) {
+                    return false;
+                }
+                if (valuesMissing == 0) {
+                    finish();
+                    return true;
+                }
             case R.id.action_delete:
                 // Pop up confirmation dialog for deletion
                 showDeleteConfirmationDialog();

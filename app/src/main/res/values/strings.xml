@@ -28,7 +28,7 @@
     <string name="quantity_lower_than_zero">Quantity cannot be lower than 0</string>
     <string name="unknown_supplier">Unknown Supplier</string>
     <string name="empty_view_title_text">Get started by adding a book.</string>
-    <string name="empty_view_subtitle_text">Product name is a required field</string>
+    <string name="empty_view_subtitle_text">Product name, supplier name and supplier phone number are required fields</string>
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
     <string name="discard">Discard</string>
     <string name="keep_editing">Keep Editing</string>

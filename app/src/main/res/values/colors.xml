@@ -11,4 +11,5 @@
     <color name="editorColorPrimaryDark">#3F51B5</color>
     <color name="list_background">#FFFFF1</color>
     <color name="product_name">#1A237E</color>
+    <color name="subtitle_text_color">#A2AAB0</color>
 </resources>
